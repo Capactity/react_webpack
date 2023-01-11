@@ -1,5 +1,6 @@
 // webpack 公共配置
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin"); //最终构建好的静态资源都引入到一个html文件中,才能在浏览器中运行
 
 module.exports = {
   entry: path.join(_dirname, "../src/index.tsx"), // 入口文件
@@ -28,4 +29,10 @@ module.exports = {
     // 配置解析后缀查找文件
     extensions: [".js", ".tsx", ".ts"],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "../public/index.html"), // 模版取定义root节点的模版
+      inject: true, // 自动注入静态资源
+    }),
+  ],
 };

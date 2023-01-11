@@ -24,4 +24,8 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    // 配置解析后缀查找文件
+    extensions: [".js", ".tsx", ".ts"],
+  },
 };

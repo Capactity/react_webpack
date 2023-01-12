@@ -1,5 +1,6 @@
 // webpack 公共配置
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin"); //最终构建好的静态资源都引入到一个html文件中,才能在浏览器中运行
 
 module.exports = {
@@ -33,6 +34,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "../public/index.html"), // 模版取定义root节点的模版
       inject: true, // 自动注入静态资源
+    }),
+    new webpack.DefinePlugin({
+      // 设置环境变量
+      "process.env.BASE_ENV": JSON.stringify(process.env.BASE_NEW),
     }),
   ],
 };

@@ -3,7 +3,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin"); //最终构建好的静态资源都引入到一个html文件中,才能在浏览器中运行
 
 module.exports = {
-  entry: path.join(_dirname, "../src/index.tsx"), // 入口文件
+  entry: path.join(__dirname, "../src/index.tsx"), // 入口文件
   output: {
     // 出口文件
     filename: "static/js/[name].js", // 输出js的名称

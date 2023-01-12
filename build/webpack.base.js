@@ -24,6 +24,22 @@ module.exports = {
           },
         },
       },
+      {
+        test: /.(css|less)$/, // 匹配css文件
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: ["autoprefixer"],
+              },
+            },
+          },
+          "less-loader",
+        ],
+      },
     ],
   },
   resolve: {

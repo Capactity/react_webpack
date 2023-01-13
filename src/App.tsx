@@ -1,12 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './app.less'
 import Class from './components/Class'
 
 function App() {
+    const [count, setCounts] = useState('')
+    const onChange = (e: any) => {
+        setCounts(e.target.value)
+    }
     return (
         <>
-            <h2>webpack5-react-ts</h2>
-            <Class></Class>
+            <h2>webpack5+react+ts</h2>
+            <p>受控组件</p>
+            <input type="text" value={count} onChange={onChange} />
+            <br />
+            <p>非受控组件</p>
+            <input type="text" />
+
         </>
     )
 

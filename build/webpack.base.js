@@ -8,7 +8,7 @@ module.exports = {
   output: {
     // 出口文件
     filename: "static/js/[name].js", // 输出js的名称
-    path: path.join(__dirname, "/dist"), // 打包输出路径
+    path: path.join(__dirname, "../dist"), // 打包输出路径
     clean: true, // 是否需要删除dist文件
     publicPath: "/", // 打包文件公共前缀路径
   },
@@ -21,6 +21,18 @@ module.exports = {
       {
         test: /.(css|less)$/, // 匹配css文件
         use: ["style-loader", "css-loader", "postcss-loader", "less-loader"],
+      },
+      {
+        test: /.(png|jpg|jpeg|gif|svg)$/,
+        type: "asset",
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10 * 1024, // 小于10kb转base64位
+          },
+        },
+        generator: {
+          filename: "static/images/[name][ext]", // 文件输出目录和命名
+        },
       },
     ],
   },

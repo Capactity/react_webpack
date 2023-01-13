@@ -14,7 +14,6 @@ module.exports = {
         corejs: 3, // 配置使用core-js使用的版本
       },
     ],
-    ["@babel/plugin-proposal-decorators", { legacy: true }], // 支持装饰器语法
     "@babel/preset-react",
     "@babel/preset-typescript",
   ],

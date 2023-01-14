@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import './app.less'
-import Class from './components/Class'
 
 function App() {
     const [count, setCounts] = useState('')

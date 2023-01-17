@@ -8,7 +8,7 @@ function App() {
     }
     return (
         <>
-            <h2>webpack5+react+ts</h2>
+            <h2>webpack5+react+ts </h2>
             <p>受控组件</p>
             <input type="text" value={count} onChange={onChange} />
             <br />

@@ -4,6 +4,7 @@ import './app.less'
 function App() {
     const [count, setCounts] = useState('')
     const onChange = (e: any) => {
+
         setCounts(e.target.value)
     }
     return (

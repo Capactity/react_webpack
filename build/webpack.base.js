@@ -15,6 +15,7 @@ module.exports = {
   module: {
     rules: [
       {
+        include: [path.resolve(__dirname, "../src")], // 仅针对src文件的ts,tsx进行loader解析
         test: /.(ts|tsx)$/, // 匹配ts,tsx文件
         use: ["thread-loader", "babel-loader"],
       },
@@ -39,6 +40,10 @@ module.exports = {
   resolve: {
     // 配置解析后缀查找文件
     extensions: [".js", ".tsx", ".ts"],
+    alias: {
+      // 配置别名引用
+      "@": path.join(__dirname, "../src"),
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({

@@ -16,7 +16,7 @@ module.exports = {
     rules: [
       {
         test: /.(ts|tsx)$/, // 匹配ts,tsx文件
-        use: "babel-loader",
+        use: ["thread-loader", "babel-loader"],
       },
       {
         test: /.(css|less)$/, // 匹配css文件

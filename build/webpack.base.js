@@ -20,7 +20,13 @@ module.exports = {
         use: ["thread-loader", "babel-loader"],
       },
       {
-        test: /.(css|less)$/, // 匹配css文件
+        include: [path.resolve(__dirname, "../src")],
+        test: /.css$/, // 匹配css文件
+        use: ["style-loader", "css-loader", "postcss-loader"],
+      },
+      {
+        include: [path.resolve(__dirname, "../src")],
+        test: /.less$/, // 匹配less文件
         use: ["style-loader", "css-loader", "postcss-loader", "less-loader"],
       },
       {
@@ -44,6 +50,7 @@ module.exports = {
       // 配置别名引用
       "@": path.join(__dirname, "../src"),
     },
+    modules: [path.resolve(__dirname, "../node_modules")], // 查找第三方模块只在本项目的node_modules中查找，避免从全局模块获取，打包丢失。
   },
   plugins: [
     new HtmlWebpackPlugin({

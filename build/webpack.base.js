@@ -50,4 +50,8 @@ module.exports = {
       "process.env.BASE_ENV": JSON.stringify(process.env.BASE_NEW),
     }),
   ],
+  cache: {
+    // 开启持久化存储缓存
+    type: "filesystem", // 使用文件缓存，改善后续打包构建速度
+  },
 };

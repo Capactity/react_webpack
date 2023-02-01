@@ -2,7 +2,8 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin"); //最终构建好的静态资源都引入到一个html文件中,才能在浏览器中运行
-
+const MiniCssExtractPlugin = require("mini-css-extract-plugin"); // 抽取css样式，开发模式中嵌入style标签中方便调试，打包css单独抽离文件
+const isDev = process.env.NODE_ENV === "development"; // 是否为开发模式
 module.exports = {
   entry: path.join(__dirname, "../src/index.tsx"), // 入口文件
   output: {
@@ -22,12 +23,21 @@ module.exports = {
       {
         include: [path.resolve(__dirname, "../src")],
         test: /.css$/, // 匹配css文件
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        use: [
+          isDev ? "style-loader" : MiniCssExtractPlugin.loader, //  开发环境使用style-loader 打包模式抽离css
+          "css-loader",
+          "postcss-loader",
+        ],
       },
       {
         include: [path.resolve(__dirname, "../src")],
         test: /.less$/, // 匹配less文件
-        use: ["style-loader", "css-loader", "postcss-loader", "less-loader"],
+        use: [
+          isDev ? "style-loader" : MiniCssExtractPlugin.loader, //  开发环境使用style-loader 打包模式抽离css
+          "css-loader",
+          "postcss-loader",
+          "less-loader",
+        ],
       },
       {
         test: /.(png|jpg|jpeg|gif|svg)$/,

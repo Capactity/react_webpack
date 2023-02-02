@@ -30,7 +30,7 @@ module.exports = merge(baseConfig, {
     minimizer: [
       new CssMinimizerPlugin(), // 压缩css
       new TerserPlugin({
-        // 压缩js
+        // 压缩 js
         parallel: true, // 开启多线程压缩
         terserOptions: {
           compress: {

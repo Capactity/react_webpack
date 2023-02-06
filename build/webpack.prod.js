@@ -35,6 +35,10 @@ module.exports = merge(baseConfig, {
         `${path.join(__dirname, "../src")}/**/*.tsx`,
         path.join(__dirname, "../public/index.html"),
       ]),
+      safelist: {
+        // 配置白名单, 不过滤antd组件库相关class前缀ant
+        standard: [/^ant-/],
+      },
     }),
   ],
   optimization: {

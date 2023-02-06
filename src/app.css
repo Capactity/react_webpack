@@ -2,3 +2,8 @@ h2 {
   color: red;
   transform: translateX(100px);
 }
+
+.test-unused-css {
+  color: red;
+  transform: translateX(100px);
+}

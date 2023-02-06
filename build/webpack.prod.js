@@ -1,11 +1,13 @@
-// 打包环境配置
+// 打包环境配置，默认支持tree shaking 清理未引用的js
 const path = require("path");
 const { merge } = require("webpack-merge");
 const baseConfig = require("./webpack.base");
 const CopyPlugin = require("copy-webpack-plugin");
+const globAll = require("glob-all");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin"); // css压缩插件
 const TerserPlugin = require("terser-webpack-plugin"); // 压缩js插件
+const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
 module.exports = merge(baseConfig, {
   mode: "production", // 生产模式，开启tree-shaking和代码压缩
   plugins: [
@@ -24,6 +26,15 @@ module.exports = merge(baseConfig, {
     // 抽离css插件
     new MiniCssExtractPlugin({
       filename: "static/css/[name].[contenthash:8].css", // 抽离css的输出目录和名称
+    }),
+    // 清理无用css
+    new PurgeCSSPlugin({
+      // 检测src下所有tsx文件和public下index.html中使用的类名和id及标签名称
+      // 只打包这些文件中用到的样式
+      paths: globAll.sync([
+        `${path.join(__dirname, "../src")}/**/*.tsx`,
+        path.join(__dirname, "../public/index.html"),
+      ]),
     }),
   ],
   optimization: {

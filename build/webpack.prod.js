@@ -4,6 +4,8 @@ const { merge } = require("webpack-merge");
 const baseConfig = require("./webpack.base");
 const CopyPlugin = require("copy-webpack-plugin");
 const globAll = require("glob-all");
+const glob = require("glob");
+const CompressionPlugin = require("compression-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin"); // css压缩插件
 const TerserPlugin = require("terser-webpack-plugin"); // 压缩js插件
@@ -39,6 +41,14 @@ module.exports = merge(baseConfig, {
         // 配置白名单, 不过滤antd组件库相关class前缀ant
         standard: [/^ant-/],
       },
+    }),
+    // 打包生成gzip文件
+    new CompressionPlugin({
+      test: /.(js|css)$/, // 只生成css, js压缩文件
+      filename: "[path][base].gz", // 文件命名
+      algorithm: "gzip", // 压缩格式，默认gzip
+      threshold: 10240, // 当大小大于该值的文件才会被处理， 默认10k
+      minRatio: 0.8, // 压缩率，默认0.8
     }),
   ],
   optimization: {

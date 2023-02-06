@@ -39,5 +39,25 @@ module.exports = merge(baseConfig, {
         },
       }),
     ],
+    // 分割代码
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          test: /node_modules/, // 提取node_modules代码
+          name: "vendors", // 提取文件命名为vendors, js后缀和chunkhash自动添加
+          minChunks: 1, // 是要使用过一次的则提取出来
+          chunks: "initial", // 只提取初始化能获取到的模块
+          minSize: 0, // 提取代码体积大于0的
+          priority: 1, // 优先级为1
+        },
+      },
+      // 提取页面公共代码
+      // commons: {
+      //   name: "commons", // 提取文件命名为commons
+      //   minChunks: 2,
+      //   chunks: "initial",
+      //   minSize: 0,
+      // },
+    },
   },
 });
